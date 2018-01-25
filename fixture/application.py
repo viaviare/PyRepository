@@ -1,5 +1,5 @@
 from selenium import webdriver
-from group import Group
+
 
 class Application:
 
