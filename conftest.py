@@ -4,20 +4,17 @@ from fixture.application import Application
 
 fixture = None
 
+
 @pytest.fixture
 def app():
-    if fixture is None:
-        login()
-    else:
-        if not fixture.is_valid:
-            login()
-    return fixture
-
-
-def login():
     global fixture
-    fixture = Application()
+    if fixture is None:
+        fixture = Application()
+    else:
+        if not fixture.helper.is_valid:
+            fixture = Application()
     fixture.session.login(username="admin", password="secret")
+    return fixture
 
 
 @pytest.fixture(scope="session", autouse=True)
