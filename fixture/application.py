@@ -10,7 +10,7 @@ class Application:
 
     def __init__(self):
         self.wd = webdriver.Chrome()
-        self.wd.implicitly_wait(2)
+        self.wd.implicitly_wait(0)
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.helper = HelperBase(self)

@@ -14,5 +14,5 @@ class NavigationHelper:
 
     def open_groups_page(self):
         wd = self.app.wd
-        if not wd.current_url.endswith("/group.php") and len(wd.find_elements_by_name("edit")) > 0:
+        if not wd.current_url.endswith("/group.php") and not len(wd.find_elements_by_name("edit")) > 0:
             wd.find_element_by_link_text("groups").click()
