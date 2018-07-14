@@ -1,5 +1,6 @@
 import pytest
 import json
+import os.path
 from fixture.application import Application
 
 
@@ -11,8 +12,10 @@ def app(request):
     global fixture
     global target
     browser = request.config.getoption("--browser")
-    with open (request.config.getoption("--target")) as config_file:
-        target = json.load(config_file)
+    if target is None:
+        config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), request.config.getoption("--target"))
+        with open (config_file) as f:
+            target = json.load(f)
     if fixture is None or not fixture.helper.is_valid:
         fixture = Application(browser=browser, baseUrl=target['baseUrl'])
     fixture.session.login(username=target['username'], password=target['password'])
